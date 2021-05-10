@@ -4,7 +4,7 @@ secret_key=""
 region="us-east-1"
 } 
 
-#create vpc
+#VPC
 
 resource "aws_vpc" "digital-vpc" {
   cidr_block = "10.0.0.0/16"
@@ -16,7 +16,7 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.digital-vpc.id
 }
 
-#create route table 
+#Route Table 
 resource "aws_route_table" "digital-route-table" {
   vpc_id = aws_vpc.digital-vpc.id
 
@@ -31,7 +31,7 @@ resource "aws_route_table" "digital-route-table" {
   }
 }
 
-#creat subnet
+#Subnet
 resource "aws_subnet" "subnet-1" {
   vpc_id     = aws_vpc.digital-vpc.id
   cidr_block = "10.0.1.0/24"
@@ -50,7 +50,7 @@ resource "aws_subnet" "subnet-2" {
     Name = "digital-subnet-2"  
   }
 }
-#associate subnet with route table 
+#associate Subnet with Route Table 
 resource "aws_route_table_association" "a" {
   subnet_id      = aws_subnet.subnet-1.id
   route_table_id = aws_route_table.digital-route-table.id
@@ -60,7 +60,7 @@ resource "aws_route_table_association" "b" {
   route_table_id = aws_route_table.digital-route-table.id
 }
 
-#create SG
+#Security Group
 resource "aws_security_group" "allow_web" {
   name        = "allow_web_traffic"
   description = "Allow web inbound traffic"
@@ -99,7 +99,7 @@ resource "aws_security_group" "allow_web" {
     Name = "allow_web"
   }
 }
-#create Network interface with an ip in the subnet that was created in step 4
+#Network interface with an ip in the subnet that was created in step 4
 resource "aws_network_interface" "web-server-nic" {
   subnet_id       = aws_subnet.subnet-1.id
   private_ips     = ["10.0.1.50"]

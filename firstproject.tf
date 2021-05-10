@@ -11,7 +11,7 @@ resource "aws_vpc" "digital-vpc" {
   
   }
 
-#creat IGW and connect to vpc
+#IGW and connect to vpc
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.digital-vpc.id
 }
@@ -31,7 +31,7 @@ resource "aws_route_table" "digital-route-table" {
   }
 }
 
-#Subnet
+#Subnets
 resource "aws_subnet" "subnet-1" {
   vpc_id     = aws_vpc.digital-vpc.id
   cidr_block = "10.0.1.0/24"

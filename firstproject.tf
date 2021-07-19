@@ -122,9 +122,4 @@ resource "aws_instance" "web_server_instance" {
   count=2 
 
 
-  network_interface {
-       device_index= 0
-       network_interface_id=aws_network_interface.web-server-nic.id
-  }
-
-}
+  

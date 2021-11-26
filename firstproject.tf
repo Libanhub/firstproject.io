@@ -120,6 +120,6 @@ resource "aws_instance" "web_server_instance" {
   availability_zone="us-east-1b"
   key_name= "mykeypair-LA ${count.index}" 
   count=2 
-
+words words
 
   
